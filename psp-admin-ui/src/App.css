@@ -1,0 +1,1560 @@
+.page {
+  min-height: 100vh;
+  background: #0b1020;
+  color: #ffffff;
+  padding: 24px;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.page-title {
+  margin: 0 0 8px 0;
+  font-size: 32px;
+}
+
+.button-row {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  align-items: center;
+}
+
+.selection-title {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+}
+
+.selection-text {
+  margin: 0;
+}
+
+/* Подзаголовок */
+.page-subtitle {
+  margin: 0 0 24px 0;
+  color: #b8c0d9;
+}
+
+.card {
+  background: #151c33;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.payments-toolbar .field-group,
+.payment-form-grid .field-group {
+  margin-bottom: 0;
+}
+/* Подпись */
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #b8c0d9;
+}
+
+/* Главная кнопка */
+.primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px; /* Внутренние отступы */
+  border-radius: 10px; /* Скругление */
+  border: 1px solid #2f63c7; /* Тонкая граница в тон кнопки */
+  background: linear-gradient(
+    180deg,
+    #3575ef 0%,
+    #2d66d8 100%
+  ); /* Мягкий градиент */
+  color: #ffffff; /* Белый текст */
+  cursor: pointer; /* Курсор-указатель */
+  font-weight: 700; /* Жирный текст */
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 10px 24px rgba(27, 72, 168, 0.18);
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease; /* Плавные эффекты */
+}
+
+/* Наведение */
+.primary-button:hover:not(:disabled) {
+  border-color: #4c82ea; /* Чуть ярче граница */
+  box-shadow: 0 0 0 3px rgba(76, 130, 234, 0.18); /* Мягкая синяя подсветка */
+}
+
+/* Нажатие */
+.primary-button:active:not(:disabled) {
+  transform: translateY(1px); /* Лёгкое нажатие */
+}
+
+/* Заблокированная кнопка */
+.primary-button:disabled {
+  opacity: 0.6; /* Приглушаем */
+  cursor: not-allowed; /* Показываем, что нельзя нажать */
+  box-shadow: none;
+}
+
+/* Заголовок секции */
+.section-title {
+  margin: 0 0 12px 0;
+  font-size: 22px;
+}
+
+/* Текст секции */
+.section-text {
+  margin: 0;
+  color: #b8c0d9;
+}
+
+/* Текст ошибки */
+.error-text {
+  margin-top: 12px;
+  color: #ff8f8f;
+  font-weight: 700;
+}
+
+/* Блок summary */
+.summary-block {
+  display: grid;
+  gap: 16px;
+}
+
+/* Внутренний блок summary */
+.summary-subblock {
+  background: #0f1528;
+  border: 1px solid #33415c;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+/* Подзаголовок */
+.sub-title {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+/* Красивый вывод JSON */
+.json-box {
+  margin: 0;
+  padding: 12px;
+  background: #0b1020;
+  border-radius: 10px;
+  color: #b8c0d9;
+  overflow-x: auto;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.summary-grid + .card,
+.summary-grid + .psp-admin-users-grid {
+  margin-top: 24px;
+}
+
+/* Одна карточка summary */
+.summary-card {
+  background: #0f1528;
+  border: 1px solid #33415c;
+  border-radius: 14px;
+  padding: 14px 12px;
+}
+
+/* Подпись внутри карточки */
+.summary-label {
+  margin: 0 0 8px 0;
+  font-size: 13px;
+  color: #b8c0d9;
+}
+
+/* Большое значение */
+.summary-value {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  word-break: break-word;
+}
+
+/* Маленькое значение для merchantId */
+.summary-value-small {
+  font-size: 13px;
+  font-weight: 400;
+  color: #d9e1f2;
+}
+
+/* Обёртка таблицы, чтобы можно было скроллить по горизонтали */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+/* Таблица платежей */
+.payments-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+/* Заголовки и ячейки */
+.payments-table th,
+.payments-table td {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 1px solid #33415c;
+  vertical-align: top;
+}
+
+/* Заголовки таблицы */
+.payments-table th {
+  color: #b8c0d9;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* Текст в таблице */
+.payments-table td {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+/* Моноширинный текст для id */
+.mono-cell {
+  font-family: monospace;
+  font-size: 12px;
+  color: #d9e1f2;
+  word-break: break-all;
+}
+
+.merchant-events-table {
+  table-layout: auto;
+}
+
+.merchant-events-table th:nth-child(1),
+.merchant-events-table td:nth-child(1) {
+  width: 150px;
+}
+
+.merchant-events-table th:nth-child(2),
+.merchant-events-table td:nth-child(2) {
+  width: 200px;
+}
+
+.merchant-events-table th:nth-child(3),
+.merchant-events-table td:nth-child(3),
+.merchant-events-table th:nth-child(4),
+.merchant-events-table td:nth-child(4) {
+  width: 190px;
+}
+
+.merchant-events-time,
+.merchant-events-action,
+.merchant-events-meta {
+  line-height: 1.55;
+  word-break: break-word;
+}
+
+.merchant-events-time {
+  white-space: normal;
+}
+
+.merchant-events-action {
+  font-weight: 600;
+  color: #eef3ff;
+}
+
+.merchant-events-meta-label {
+  margin-bottom: 4px;
+  color: #dfe6fb;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.merchant-events-mono {
+  line-height: 1.5;
+  color: #9fb0d8;
+}
+
+.merchant-events-payload-cell {
+  min-width: 360px;
+}
+
+.merchant-events-payload-list {
+  margin: 0;
+}
+
+.merchant-events-payload-row {
+  grid-template-columns: 150px minmax(220px, 1fr);
+}
+
+.merchant-events-payload-key {
+  white-space: normal;
+}
+
+.merchant-events-payload-value {
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+.merchant-events-empty {
+  color: #8fa0c7;
+  font-size: 13px;
+}
+
+/* Кликабельная строка таблицы */
+.clickable-row {
+  cursor: pointer;
+}
+
+/* Подсветка строки при наведении */
+.clickable-row:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Сетка деталей */
+.details-grid {
+  display: grid;
+  gap: 16px;
+}
+
+/* Карточка деталей */
+.details-card {
+  background: #0f1528;
+  border: 1px solid #33415c;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.details-summary-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.9fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.details-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.details-kv-list {
+  margin: 0;
+}
+
+.details-kv-list .payload-row {
+  grid-template-columns: 160px 1fr;
+}
+
+/* Блок событий растягиваем шире */
+.details-events {
+  grid-column: 1 / -1;
+  margin-top: 22px;
+}
+
+/* Один event */
+.event-box {
+  background: #11192f;
+  border: 1px solid #33415c;
+  border-radius: 12px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.payload-list {
+  background: #0b1020;
+  border: 1px solid #24314f;
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: left; /* Всё внутри выравниваем влево */
+}
+
+.payload-row {
+  display: grid;
+  grid-template-columns: 170px 1fr; /* Чуть шире колонка под ключ */
+  column-gap: 14px; /* Нормальный зазор между ключом и значением */
+  align-items: start;
+  padding: 10px 12px;
+  border-bottom: 1px solid #1c2742;
+  text-align: left; /* На всякий случай тоже влево */
+}
+
+.payload-key {
+  color: #8fa0c7;
+  font-size: 12px;
+  font-weight: 700;
+  word-break: break-word;
+  white-space: nowrap; /* Ключ не слипается и не ломается */
+}
+
+.payload-value {
+  color: #e5ecff;
+  font-size: 13px;
+  word-break: break-word;
+  text-align: left;
+}
+
+/* Блок кнопок в деталях */
+.details-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  width: min(100%, 520px);
+  margin-top: 22px;
+  margin-left: auto;
+  padding-top: 18px;
+  border-top: 1px solid #283452;
+  justify-content: flex-start;
+}
+
+.details-actions .primary-button,
+.details-actions .secondary-button {
+  min-width: 150px;
+}
+
+.details-actions-inline {
+  width: 100%;
+  margin-top: 0;
+  margin-left: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Блок пагинации */
+.pagination-row {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Текст пагинации */
+.pagination-text {
+  color: #b8c0d9;
+  font-size: 14px;
+}
+
+/* Вторичная кнопка */
+.secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0 18px; /* Внутренние отступы */
+  border-radius: 10px; /* Скругление */
+  border: 1px solid #3a4a72; /* Более спокойная граница */
+  background: #121a30; /* Более чистый тёмный фон */
+  color: #e7eeff; /* Светлый текст */
+  cursor: pointer; /* Курсор-указатель */
+  font-weight: 700; /* Жирный текст */
+  font-size: 14px;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease; /* Плавные эффекты */
+}
+
+/* Наведение */
+.secondary-button:hover:not(:disabled) {
+  background: #18233f; /* Чуть светлее фон */
+  border-color: #5d76b3; /* Подсвечиваем границу */
+  box-shadow: 0 0 0 3px rgba(93, 118, 179, 0.15); /* Мягкая подсветка */
+}
+
+/* Нажатие */
+.secondary-button:active:not(:disabled) {
+  transform: translateY(1px); /* Лёгкий эффект нажатия */
+}
+
+/* Заблокированная кнопка */
+.secondary-button:disabled {
+  opacity: 0.55; /* Приглушаем */
+  cursor: not-allowed; /* Показываем, что кнопка неактивна */
+  box-shadow: none;
+}
+
+.demo-warning-button {
+  border-color: rgba(245, 158, 11, 0.42);
+  background:
+    linear-gradient(180deg, rgba(68, 42, 12, 0.96) 0%, rgba(46, 28, 10, 0.98) 100%);
+  color: #ffd79a;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 10px 24px rgba(73, 44, 8, 0.14);
+}
+
+.demo-warning-button:hover:not(:disabled) {
+  background:
+    linear-gradient(180deg, rgba(84, 51, 14, 0.98) 0%, rgba(58, 34, 10, 1) 100%);
+  border-color: rgba(251, 191, 36, 0.62);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.16);
+}
+
+/* Базовый бейдж статуса */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+/* created */
+.status-created {
+  background: rgba(143, 160, 199, 0.12);
+  border-color: rgba(143, 160, 199, 0.28);
+  color: #b8c0d9;
+}
+
+/* processing */
+.status-processing {
+  background: rgba(76, 130, 234, 0.12);
+  border-color: rgba(76, 130, 234, 0.28);
+  color: #8fb5ff;
+}
+
+/* authorized */
+.status-authorized {
+  background: rgba(154, 120, 255, 0.12);
+  border-color: rgba(154, 120, 255, 0.28);
+  color: #c7b3ff;
+}
+
+/* captured */
+.status-captured {
+  background: rgba(48, 190, 120, 0.12);
+  border-color: rgba(48, 190, 120, 0.28);
+  color: #79e2a8;
+}
+
+/* declined */
+.status-declined {
+  background: rgba(255, 95, 95, 0.12);
+  border-color: rgba(255, 95, 95, 0.28);
+  color: #ff9d9d;
+}
+
+/* timeout */
+.status-timeout {
+  background: rgba(255, 183, 77, 0.12);
+  border-color: rgba(255, 183, 77, 0.28);
+  color: #ffd08a;
+}
+
+/* refunded */
+.status-refunded {
+  background: rgba(79, 209, 197, 0.12);
+  border-color: rgba(79, 209, 197, 0.28);
+  color: #8ff3ea;
+}
+
+/* canceled */
+.status-canceled {
+  background: rgba(160, 174, 192, 0.12);
+  border-color: rgba(160, 174, 192, 0.28);
+  color: #cbd5e1;
+}
+
+/* error */
+.status-error {
+  background: rgba(255, 120, 120, 0.12);
+  border-color: rgba(255, 120, 120, 0.28);
+  color: #ffb0b0;
+}
+
+/* chargeback */
+.status-chargeback {
+  background: rgba(255, 80, 140, 0.12);
+  border-color: rgba(255, 80, 140, 0.28);
+  color: #ff9bc0;
+}
+
+/* Бейджи именно для upstream status */
+.upstream-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+.upstream-authorized {
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(34, 197, 94, 0.34);
+  color: #86efac;
+}
+
+.upstream-declined {
+  background: rgba(239, 68, 68, 0.14);
+  border-color: rgba(239, 68, 68, 0.34);
+  color: #fca5a5;
+}
+
+.upstream-chargeback {
+  background: rgba(190, 24, 93, 0.16);
+  border-color: rgba(190, 24, 93, 0.34);
+  color: #f9a8d4;
+}
+
+.upstream-error {
+  background: rgba(220, 38, 38, 0.16);
+  border-color: rgba(220, 38, 38, 0.34);
+  color: #fca5a5;
+}
+
+.upstream-timeout {
+  background: rgba(249, 115, 22, 0.14);
+  border-color: rgba(249, 115, 22, 0.34);
+  color: #fdba74;
+}
+
+.upstream-default {
+  background: rgba(148, 163, 184, 0.14);
+  border-color: rgba(148, 163, 184, 0.32);
+  color: #d8e1f0;
+}
+
+.upstream-empty {
+  background: rgba(100, 116, 139, 0.12);
+  border-color: rgba(100, 116, 139, 0.24);
+  color: #aebcd3;
+}
+
+.nav-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.nav-row > button {
+  margin: 0;
+}
+
+.merchant-portal-auth-card {
+  display: grid;
+  gap: 18px;
+}
+
+.merchant-auth-shell {
+  max-width: 920px;
+  width: 100%;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.merchant-auth-copy {
+  text-align: center;
+  line-height: 1.6;
+}
+
+.merchant-auth-mode-row {
+  justify-content: flex-start;
+  margin-top: 0;
+}
+
+.merchant-auth-notice {
+  padding: 16px 18px;
+}
+
+.merchant-auth-form-shell {
+  max-width: none;
+}
+
+.merchant-profile-card {
+  gap: 16px;
+}
+
+.merchant-profile-card .section-title {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.merchant-portal-auth-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.merchant-profile-shell {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 22px 24px 24px;
+  border: 1px solid #2c3a5d;
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(20, 28, 51, 0.88) 0%, rgba(13, 19, 36, 0.96) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+.merchant-profile-copy {
+  margin-bottom: 18px;
+  max-width: 620px;
+  color: #aebad8;
+  line-height: 1.6;
+}
+
+.merchant-profile-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border: 1px solid #33415c;
+  border-radius: 14px;
+  background: rgba(10, 16, 31, 0.55);
+  color: #d7e1fb;
+  font-size: 14px;
+}
+
+.merchant-profile-grid {
+  max-width: none;
+  align-items: end;
+  gap: 18px;
+}
+
+.merchant-profile-grid .field-group,
+.merchant-form-grid .field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.merchant-profile-grid .input,
+.merchant-form-grid .input {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  height: 48px;
+  border-radius: 12px;
+  border: 1px solid #55617f;
+  background: #202741;
+  color: #f4f7ff;
+  padding: 0 14px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.merchant-profile-grid .label,
+.merchant-form-grid .label {
+  margin-bottom: 0;
+  color: #d5def5;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.merchant-profile-actions {
+  margin-top: 14px;
+  justify-content: flex-start;
+}
+
+.merchant-settings-security-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.merchant-security-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.merchant-security-card .section-title {
+  margin-bottom: 0;
+}
+
+.merchant-security-card .section-text {
+  margin-top: 0;
+}
+
+.merchant-security-status-card {
+  padding: 18px;
+}
+
+.merchant-team-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.psp-admin-users-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.psp-admin-merchants-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.psp-payment-details-card {
+  margin-top: 24px;
+}
+
+.merchant-team-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.merchant-team-card .section-title {
+  margin-bottom: 0;
+}
+
+.merchant-team-card .section-text {
+  margin-top: 0;
+}
+
+.payments-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  column-gap: 18px;
+  row-gap: 14px;
+  align-items: end;
+}
+
+.psp-payments-filter-grid {
+  margin-top: 18px;
+  align-items: end;
+}
+
+.events-filter-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  column-gap: 18px;
+  row-gap: 16px;
+  align-items: end;
+  margin-top: 20px;
+}
+
+.merchant-portal-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.merchant-portal-tabs {
+  margin-bottom: 20px;
+}
+
+.merchant-session-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.merchant-session-copy {
+  display: grid;
+  gap: 6px;
+}
+
+.merchant-session-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #f2f6ff;
+}
+
+.merchant-session-actions {
+  margin-top: 0;
+}
+
+.merchant-created-note,
+.toolbar-mode-note {
+  margin-bottom: 12px;
+}
+
+.payments-top-grid {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 18px;
+  align-items: stretch;
+  margin-bottom: 36px;
+}
+
+.payments-top-grid > .card {
+  margin-bottom: 0;
+}
+
+.payments-toolbar,
+.create-payment-card {
+  height: 100%;
+}
+
+.payments-toolbar {
+  display: flex;
+  flex-direction: column;
+}
+
+.payments-toolbar .section-title,
+.create-payment-card .section-title {
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 20px 0;
+}
+
+.payments-toolbar .field-group + .field-group {
+  margin-top: 18px;
+}
+
+.payments-toolbar .button-row {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.payments-toolbar .field-group,
+.create-payment-card .field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.payments-toolbar .label,
+.create-payment-card .label {
+  display: block;
+  margin-bottom: 0;
+  text-align: left;
+}
+
+.payments-toolbar .input,
+.create-payment-card .input,
+.create-payment-card select,
+.create-payment-card input[type="month"] {
+  width: 100%;
+  height: 56px;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid #5a6481;
+  background: #3f3f40;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.payments-filter-grid .field-group {
+  gap: 6px;
+  min-width: 0;
+}
+
+.payments-filter-grid .label {
+  font-size: 13px;
+  color: #c6d0e8;
+}
+
+.payments-filter-grid .input,
+.payments-filter-grid select {
+  width: 100%;
+  min-width: 0;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.events-filter-grid .field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  min-width: 0;
+}
+
+.events-filter-grid .label {
+  font-size: 13px;
+  color: #c6d0e8;
+}
+
+.events-filter-grid .input,
+.events-filter-grid select {
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
+  padding: 0 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 0;
+}
+
+.payments-summary-card {
+  margin-top: 24px;
+}
+
+.payment-form-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.8fr 0.9fr;
+  gap: 18px 20px;
+  align-items: start;
+}
+
+.payment-form-card-number {
+  grid-column: span 2;
+}
+
+.payment-form-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .payments-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .merchant-team-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .psp-admin-users-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .details-summary-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .details-actions {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .payment-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-form-card-number {
+    grid-column: span 1;
+  }
+
+  .payment-form-actions {
+    justify-content: stretch;
+  }
+
+  .payment-form-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .payments-filter-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .events-filter-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .payments-filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .events-filter-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .payments-filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .events-filter-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.expiry-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.expiry-row .input {
+  text-align: center;
+}
+
+.payments-bottom-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 36px;
+}
+
+.payments-bottom-stack > .card {
+  margin-bottom: 0;
+}
+
+.public-checkout-shell {
+  min-height: calc(100vh - 48px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.public-checkout-container {
+  width: 100%;
+  max-width: 980px;
+}
+
+.public-checkout-hero {
+  margin: 0 auto 28px;
+  max-width: 860px;
+  text-align: center;
+}
+
+.public-checkout-kicker {
+  margin: 0 0 10px 0;
+  color: #9fc0ff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.public-checkout-title {
+  margin: 0 0 12px 0;
+  font-size: clamp(40px, 5vw, 56px);
+  line-height: 1.05;
+}
+
+.public-checkout-subtitle {
+  max-width: 820px;
+  margin: 0 auto;
+  font-size: 18px;
+  line-height: 1.45;
+  color: #c4d4f7;
+}
+
+.public-checkout-grid {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.public-checkout-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.public-checkout-note {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid #2f426d;
+  background: linear-gradient(180deg, rgba(33, 55, 104, 0.45), rgba(15, 22, 43, 0.7));
+  color: #d9e6ff;
+  line-height: 1.5;
+}
+
+.public-card-panel {
+  background: #1b2340;
+}
+
+.public-card-payment-box {
+  margin-top: 6px;
+  padding: 22px 24px 26px;
+  border-radius: 22px;
+  background: #1a2240;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  box-sizing: border-box;
+}
+
+.public-checkout-note-compact {
+  margin-bottom: 24px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border-color: rgba(102, 141, 230, 0.28);
+  background: linear-gradient(180deg, rgba(36, 51, 97, 0.9), rgba(28, 38, 71, 0.92));
+  font-size: 15px;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.public-card-surface {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  aspect-ratio: 1.586 / 1;
+  margin: 0 auto 24px;
+  padding: 28px 28px 26px;
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at top right, rgba(140, 180, 255, 0.22), transparent 30%),
+    linear-gradient(145deg, #2a365c 0%, #1d2749 52%, #141d37 100%);
+  border: 1px solid rgba(143, 173, 243, 0.28);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 20px 50px rgba(6, 10, 24, 0.35);
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.public-card-brand {
+  width: 92px;
+  height: 56px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.public-card-brand-visa {
+  justify-content: flex-start;
+}
+
+.public-card-brand-mastercard {
+  justify-content: flex-start;
+}
+
+.public-card-brand-text {
+  color: #ffffff;
+  font-size: 22px;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+.public-card-mastercard-mark {
+  position: relative;
+  width: 72px;
+  height: 40px;
+}
+
+.public-card-mastercard-circle {
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  opacity: 0.95;
+}
+
+.public-card-mastercard-left {
+  left: 0;
+  background: #ea5b0c;
+}
+
+.public-card-mastercard-right {
+  right: 0;
+  background: #e40019;
+  mix-blend-mode: screen;
+}
+
+.public-card-brand-placeholder {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.public-card-number-block {
+  margin-bottom: 22px;
+}
+
+.public-card-bottom-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) 180px;
+  gap: 24px;
+  align-items: end;
+}
+
+.public-card-cvv {
+  max-width: 180px;
+}
+
+.public-card-expiry-block,
+.public-card-cvv-block {
+  width: 100%;
+}
+
+.public-provider-field {
+  max-width: 260px;
+  margin-left: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px 16px;
+  border-radius: 18px;
+  background: rgba(30, 40, 73, 0.92);
+  border: 1px solid rgba(92, 118, 185, 0.26);
+}
+
+.public-provider-field-sidebar {
+  max-width: none;
+  margin-left: 0;
+}
+
+.public-provider-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.public-provider-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #85a8ff 0%, #5c7fdb 100%);
+  color: #0f1933;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.public-card-panel .label {
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #c9d7f7;
+  text-align: left;
+}
+
+.public-card-label {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #d9e4ff;
+  letter-spacing: 0.01em;
+}
+
+.public-provider-field .label {
+  margin-bottom: 0;
+  font-size: 13px;
+  color: #a9c0f6;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.public-provider-field .input,
+.public-provider-field select {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid #5f79ba;
+  background: linear-gradient(180deg, #334772 0%, #27385e 100%);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  box-sizing: border-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.public-provider-help {
+  margin: 0;
+  color: #bfd0f6;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.public-card-input {
+  width: 100%;
+  height: 64px;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 0 22px;
+  border-radius: 16px;
+  border: 1px solid #697594;
+  background: rgba(59, 61, 68, 0.94);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.public-card-input::placeholder {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.public-card-surface .expiry-row {
+  gap: 14px;
+}
+
+.public-card-number-block .public-card-input {
+  font-size: 17px;
+  letter-spacing: 0.08em;
+}
+
+.public-card-bottom-row .public-card-input {
+  font-size: 18px;
+}
+
+.public-card-panel .payment-form-actions {
+  margin-top: 26px;
+  justify-content: flex-end;
+}
+
+.public-card-panel .payment-form-actions .primary-button,
+.public-card-panel .payment-form-actions .secondary-button {
+  min-width: 220px;
+  min-height: 54px;
+  border-radius: 16px;
+  font-size: 16px;
+}
+
+.public-card-panel .payment-form-actions .secondary-button {
+  background: #1b2340;
+  border-color: #395188;
+}
+
+@media (max-width: 900px) {
+  .public-checkout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .public-checkout-sidebar {
+    gap: 18px;
+  }
+
+  .public-payment-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .public-card-surface {
+    aspect-ratio: auto;
+    padding: 22px 20px;
+  }
+
+  .public-card-bottom-row {
+    grid-template-columns: 1fr;
+  }
+
+  .public-card-cvv {
+    max-width: none;
+  }
+
+  .public-provider-field {
+    max-width: none;
+    margin-left: 0;
+  }
+}
+
+.card-payment-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.card-payment-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 28px 30px;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(120, 184, 255, 0.28), transparent 35%),
+    linear-gradient(135deg, #13203d 0%, #0f1528 45%, #132b36 100%);
+  border: 1px solid rgba(123, 165, 255, 0.2);
+}
+
+.card-payment-kicker {
+  margin: 0 0 12px 0;
+  color: #93d7ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.card-payment-title {
+  margin-bottom: 10px;
+}
+
+.card-payment-subtitle {
+  max-width: 760px;
+  margin-bottom: 0;
+}
+
+.card-payment-card {
+  background:
+    linear-gradient(180deg, rgba(23, 37, 69, 0.98), rgba(15, 21, 40, 0.98));
+  border: 1px solid rgba(129, 166, 255, 0.15);
+}
+
+.card-payment-hint {
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(79, 133, 255, 0.1);
+  border: 1px solid rgba(79, 133, 255, 0.18);
+  color: #dce7ff;
+}
+
+.card-payment-grid {
+  grid-template-columns: 1fr 0.8fr 0.9fr;
+}
+
+@media (max-width: 900px) {
+  .card-payment-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.psp-reveal-confirm {
+  display: grid;
+  gap: 10px;
+  min-width: 260px;
+}
+
+.break-anywhere {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}

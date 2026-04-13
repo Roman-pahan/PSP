@@ -1,0 +1,14 @@
+node_modules/
+dist/
+coverage/
+.DS_Store
+
+psp-admin-ui/node_modules/
+psp-admin-ui/dist/
+
+psp-backend/node_modules/
+psp-backend/dist/
+psp-backend/coverage/
+psp-backend/.env
+
+.env

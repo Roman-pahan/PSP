@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PspUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  role         String   @default("admin")
+  twoFactorSecret  String?
+  twoFactorEnabled Boolean  @default(false)
+  twoFactorRecoveryCodes String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorType  String
+  actorId    String?
+  action     String
+  entityType String
+  entityId   String?
+  payload    Json?
+  createdAt  DateTime @default(now())
+}
+
+model Merchant {
+  id        String   @id @default(cuid())
+  name      String
+  apiKey    String   @unique
+  email     String?  @unique
+  passwordHash String?
+  twoFactorSecret String?
+  twoFactorEnabled Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  payments  Payment[]
+  users     MerchantUser[]
+}
+
+model MerchantUser {
+  id           String   @id @default(cuid())
+  merchant     Merchant @relation(fields: [merchantId], references: [id])
+  merchantId   String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("manager")
+  isActive     Boolean  @default(true)
+  twoFactorSecret String?
+  twoFactorEnabled Boolean @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Payment {
+  id          String    @id @default(cuid())
+  merchant    Merchant  @relation(fields: [merchantId], references: [id])
+  merchantId  String
+  merchantOrderId String?
+
+  amount      Decimal   @db.Decimal(12, 2)
+  currency    String    // "EUR"
+  status      String    // "created" | "captured" | "failed" | ...
+  method      String    // "card"
+  direction   String    // "in"
+
+  providerCode String?  // Код провайдера: mock_bank, acquirer_x и т.д.
+
+  upstreamId  String?   // id транзакции у банка/апстрима
+  upstreamStatus  String?  // ⬅️ новый статус: что сказал банк (authorized/declined/...)
+  card        Card?     @relation(fields: [cardId], references: [id])
+  cardId      String?
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  events      PaymentEvent[]
+  edgeLogs    EdgeLog[]
+
+  @@index([merchantId, merchantOrderId])
+}
+
+model Card {
+  id           String   @id @default(cuid())
+  merchantId   String?  // если нужно привязать карту к мерчанту
+
+  bin          String?  // первые 6
+  last4        String
+  brand        String?  // VISA / MC
+  expMonth     Int
+  expYear      Int
+
+  encryptedPan String   // шифрованный PAN
+
+  createdAt    DateTime @default(now())
+
+  payments     Payment[]
+  tokens       CardToken[]
+}
+
+model CardToken {
+  id          String   @id @default(cuid())
+  merchantId  String
+  card        Card?    @relation(fields: [cardId], references: [id])
+  cardId      String?
+
+  provider    String   // от кого токен (наш/апстрим)
+  token       String
+
+  createdAt   DateTime @default(now())
+}
+
+model PaymentEvent {
+  id        String   @id @default(cuid())
+  payment   Payment  @relation(fields: [paymentId], references: [id])
+  paymentId String
+
+  type      String   // "request", "response", "webhook" и т.п.
+  status    String?  // статус на момент события
+  payload   Json?    // сырой ответ/запрос
+
+  createdAt DateTime @default(now())
+}
+
+model EdgeLog {
+  id         String    @id @default(cuid())
+  payment    Payment?  @relation(fields: [paymentId], references: [id])
+  paymentId  String?
+
+  time       DateTime  @default(now())
+  clientIp   String?
+  sourceHost String
+  destHost   String
+  method     String
+  url        String
+  statusCode Int?
+
+  rawRequest  Json?
+  rawResponse Json?
+}

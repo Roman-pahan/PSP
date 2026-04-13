@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: psp-backend
+    runtime: node
+    rootDir: psp-backend
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npx prisma migrate deploy && npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: PROCESS_MODE
+        value: auto
+      - key: CAPTURE_MODE
+        value: manual
+      - key: MERCH_PAYMENT_TIMEOUT_MS
+        value: 60000
+      - key: MERCH_PAYMENT_TIMEOUTCHECKLIST_MS
+        value: 30000
+      - key: MOCK_BANK_DISABLE_WEBHOOK
+        value: 0
+      - key: UPSTREAM_WEBHOOK_URL
+        value: https://psp-backend.onrender.com/webhook/upstream/mock_bank/payment-result
+      - key: CHECKOUT_BASE_URL
+        value: https://your-vercel-app.vercel.app
+      - key: ALLOWED_ORIGINS
+        value: https://your-vercel-app.vercel.app
+      - key: DATABASE_URL
+        fromDatabase:
+          name: psp-db
+          property: connectionString
+      - key: CARD_ENC_KEY
+        generateValue: true
+      - key: WEBHOOK_SECRET
+        generateValue: true
+      - key: MERCHANT_PORTAL_SECRET
+        generateValue: true
+      - key: PSP_ADMIN_SECRET
+        generateValue: true
+
+databases:
+  - name: psp-db
+    databaseName: psp_db
+    user: psp_db_user
