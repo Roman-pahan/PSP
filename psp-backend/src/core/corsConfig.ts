@@ -11,13 +11,35 @@ export function parseAllowedOrigins(raw: string | undefined) {
   return normalized.length ? normalized : DEFAULT_ALLOWED_ORIGINS;
 }
 
+function matchesWildcardOrigin(origin: string, allowedOrigin: string) {
+  const normalizedAllowed = String(allowedOrigin || "").trim().toLowerCase();
+  const normalizedOrigin = String(origin || "").trim().toLowerCase();
+
+  if (!normalizedAllowed.includes("*")) {
+    return false;
+  }
+
+  const escaped = normalizedAllowed.replace(
+    /[.+?^${}()|[\]\\]/g,
+    "\\$&",
+  );
+  const pattern = `^${escaped.replace(/\*/g, ".*")}$`;
+
+  return new RegExp(pattern, "i").test(normalizedOrigin);
+}
+
 export function createCorsOriginChecker(allowedOrigins: string[]) {
   return (origin: string | undefined, callback: (err: Error | null, allow?: CorsOrigin) => void) => {
     if (!origin) {
       return callback(null, true);
     }
 
-    if (allowedOrigins.includes(origin)) {
+    if (
+      allowedOrigins.includes(origin) ||
+      allowedOrigins.some((allowedOrigin) =>
+        matchesWildcardOrigin(origin, allowedOrigin),
+      )
+    ) {
       return callback(null, true);
     }
 
