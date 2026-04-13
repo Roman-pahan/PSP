@@ -6,6 +6,10 @@ function useSecureCookies() {
   return process.env.NODE_ENV === "production";
 }
 
+function getSameSitePolicy() {
+  return useSecureCookies() ? "None" : "Lax";
+}
+
 function serializeCookie(
   name: string,
   value: string,
@@ -18,7 +22,7 @@ function serializeCookie(
     `${name}=${encodeURIComponent(value)}`,
     "Path=/",
     "HttpOnly",
-    "SameSite=Lax",
+    `SameSite=${getSameSitePolicy()}`,
   ];
 
   if (useSecureCookies()) {
