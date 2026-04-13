@@ -560,6 +560,7 @@ function App() {
   const [pspAdminOverview, setPspAdminOverview] =
     useState<PspAdminOverviewResponse | null>(null);
   const [pspAdminLoading, setPspAdminLoading] = useState(false);
+  const [pspAdminRefreshLoading, setPspAdminRefreshLoading] = useState(false);
   const [pspAdminAuthMode, setPspAdminAuthMode] = useState<"login" | "register">(
     "login",
   );
@@ -591,6 +592,7 @@ function App() {
   const [pspAdminPayments, setPspAdminPayments] = useState<PspAdminPaymentItem[]>(
     [],
   );
+  const [pspAdminPaymentsLoading, setPspAdminPaymentsLoading] = useState(false);
   const [pspAdminPaymentsPage, setPspAdminPaymentsPage] = useState(1);
   const [pspAdminPaymentsTotalPages, setPspAdminPaymentsTotalPages] =
     useState(1);
@@ -1723,14 +1725,17 @@ function App() {
     }
   }, [pspAdminAuthMode, pspAdminCanSelfRegister]);
 
-  const handleLoadPspAdminOverview = useCallback(async () => {
+  const handleLoadPspAdminOverview = useCallback(async (showLoader = true) => {
     if (!pspAdminToken.trim()) {
       setPspAdminUser(null);
       setPspAdminOverview(null);
       return;
     }
 
-    setPspAdminLoading(true);
+    if (showLoader) {
+      setPspAdminLoading(true);
+      setPspAdminRefreshLoading(true);
+    }
     setError("");
 
     try {
@@ -1834,11 +1839,14 @@ function App() {
           : "Не удалось загрузить кабинет PSP",
       );
     } finally {
-      setPspAdminLoading(false);
+      if (showLoader) {
+        setPspAdminLoading(false);
+        setPspAdminRefreshLoading(false);
+      }
     }
   }, [apiBase, pspAdminToken]);
 
-  const handleLoadPspAdminPayments = useCallback(async () => {
+  const handleLoadPspAdminPayments = useCallback(async (showLoader = true) => {
     if (!pspAdminToken.trim()) {
       setPspAdminPayments([]);
       setPspAdminPaymentsPage(1);
@@ -1847,7 +1855,9 @@ function App() {
       return;
     }
 
-    setPspAdminLoading(true);
+    if (showLoader) {
+      setPspAdminPaymentsLoading(true);
+    }
     setError("");
 
     try {
@@ -1893,7 +1903,9 @@ function App() {
         err instanceof Error ? err.message : "Не удалось загрузить платежи PSP",
       );
     } finally {
-      setPspAdminLoading(false);
+      if (showLoader) {
+        setPspAdminPaymentsLoading(false);
+      }
     }
   }, [
     apiBase,
@@ -1980,7 +1992,7 @@ function App() {
           throw new Error(data.message || errorMessage);
         }
 
-        await handleLoadPspAdminPayments();
+        await handleLoadPspAdminPayments(false);
         await handleSelectPspAdminPayment(pspAdminSelectedPayment.payment.id);
       } catch (err) {
         setError(err instanceof Error ? err.message : errorMessage);
@@ -1996,7 +2008,7 @@ function App() {
       return;
     }
 
-    void handleLoadPspAdminOverview();
+    void handleLoadPspAdminOverview(false);
   }, [pspAdminToken, handleLoadPspAdminOverview]);
 
   useEffect(() => {
@@ -2031,7 +2043,7 @@ function App() {
       return;
     }
 
-    void handleLoadPspAdminPayments();
+    void handleLoadPspAdminPayments(false);
   }, [
     activePage,
     pspAdminToken,
@@ -2060,7 +2072,7 @@ function App() {
     }
 
     const intervalId = window.setInterval(async () => {
-      await handleLoadPspAdminPayments();
+      await handleLoadPspAdminPayments(false);
 
       if (pspAdminSelectedPayment?.payment.id) {
         await handleSelectPspAdminPayment(pspAdminSelectedPayment.payment.id);
@@ -2103,7 +2115,7 @@ function App() {
     }
 
     const intervalId = window.setInterval(async () => {
-      await handleLoadPspAdminPayments();
+      await handleLoadPspAdminPayments(false);
     }, 3000);
 
     return () => window.clearInterval(intervalId);
@@ -2746,7 +2758,7 @@ function App() {
       setPspAdminCreateUserEmail("");
       setPspAdminCreateUserPassword("");
       setPspAdminCreateUserRole("support");
-      void handleLoadPspAdminOverview();
+      void handleLoadPspAdminOverview(false);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Не удалось создать PSP user",
@@ -2779,7 +2791,7 @@ function App() {
       setPspAdminTwoFactorSetup(data);
       setPspAdminTwoFactorPassword("");
       setPspAdminTwoFactorCode("");
-      void handleLoadPspAdminOverview();
+      void handleLoadPspAdminOverview(false);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Не удалось начать настройку 2FA",
@@ -2826,7 +2838,7 @@ function App() {
       setPspAdminTwoFactorSetup(null);
       setPspAdminTwoFactorPassword("");
       setPspAdminTwoFactorCode("");
-      void handleLoadPspAdminOverview();
+      void handleLoadPspAdminOverview(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Не удалось включить 2FA");
     } finally {
@@ -2868,7 +2880,7 @@ function App() {
       setPspAdminRecoveryCodes([]);
       setPspAdminRecoveryCodePassword("");
       setPspAdminRecoveryCodeTotp("");
-      void handleLoadPspAdminOverview();
+      void handleLoadPspAdminOverview(false);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Не удалось отключить 2FA");
     } finally {
@@ -2910,7 +2922,7 @@ function App() {
       setPspAdminRecoveryCodes(data.recoveryCodes || []);
       setPspAdminRecoveryCodePassword("");
       setPspAdminRecoveryCodeTotp("");
-      void handleLoadPspAdminOverview();
+      void handleLoadPspAdminOverview(false);
     } catch (err) {
       setError(
         err instanceof Error
@@ -2979,7 +2991,7 @@ function App() {
         });
       }, 30000);
 
-      void handleLoadPspAdminOverview();
+      void handleLoadPspAdminOverview(false);
     } catch (err) {
       setError(
         err instanceof Error ? err.message : "Не удалось раскрыть API-ключ",
@@ -3336,15 +3348,15 @@ function App() {
               </div>
 
               <div className="button-row merchant-session-actions">
-                <button
-                  className="primary-button"
-                  onClick={() => {
-                    void handleLoadPspAdminOverview();
-                  }}
-                  disabled={pspAdminLoading}
-                >
-                  {pspAdminLoading ? "Обновление..." : "Обновить PSP Admin"}
-                </button>
+                  <button
+                    className="primary-button"
+                    onClick={() => {
+                      void handleLoadPspAdminOverview();
+                    }}
+                    disabled={pspAdminRefreshLoading}
+                  >
+                  {pspAdminRefreshLoading ? "Обновление..." : "Обновить PSP Admin"}
+                  </button>
                 <button
                   className="secondary-button"
                   onClick={handlePspAdminLogout}
@@ -4074,7 +4086,7 @@ function App() {
                     setPspAdminPaymentFilters(pspAdminPaymentDraftFilters);
                     setPspAdminPaymentsPage(1);
                   }}
-                  disabled={pspAdminLoading}
+                  disabled={pspAdminPaymentsLoading}
                 >
                   Применить
                 </button>
@@ -4092,7 +4104,7 @@ function App() {
                     setPspAdminPaymentFilters(resetFilters);
                     setPspAdminPaymentsPage(1);
                   }}
-                  disabled={pspAdminLoading}
+                  disabled={pspAdminPaymentsLoading}
                 >
                   Сбросить
                 </button>
@@ -4165,7 +4177,7 @@ function App() {
                   onClick={() =>
                     setPspAdminPaymentsPage((current) => Math.max(1, current - 1))
                   }
-                  disabled={pspAdminLoading || pspAdminPaymentsPage <= 1}
+                  disabled={pspAdminPaymentsLoading || pspAdminPaymentsPage <= 1}
                 >
                   Назад
                 </button>
@@ -4180,7 +4192,7 @@ function App() {
                     )
                   }
                   disabled={
-                    pspAdminLoading ||
+                    pspAdminPaymentsLoading ||
                     pspAdminPaymentsPage >= pspAdminPaymentsTotalPages
                   }
                 >
